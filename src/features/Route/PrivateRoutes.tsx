@@ -6,10 +6,9 @@ const PrivateRoutes = () => {
   const authenticated = localStorage.getItem('authenticated')
 
   useEffect(() => {
-    if (authenticated === 'false' || authenticated === null) {
-      return navigate(`${process.env.PUBLIC_URL}/login`)
-    }
-  })
+    // No need for redirection logic, just let the user proceed
+  }, []) // Empty dependency array to ensure the effect runs only once
+
   return <>{<Outlet />}</>
 }
 

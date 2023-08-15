@@ -10,6 +10,7 @@ export const selectCustomStyles: StylesConfig<SelectOption, false, GroupBase<Sel
     border: 'none!important',
     boxShadow: 'none!important',
     minHeight: '33px',
+    backgroundColor: '#0f2642 !important',
   }),
   indicatorsContainer: (styles) => ({
     ...styles,

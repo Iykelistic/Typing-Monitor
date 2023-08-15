@@ -36,8 +36,22 @@ export const accountApi = createApi({
       },
       invalidatesTags: ['Account'],
 
-      async onQueryStarted(_args, { queryFulfilled }) {
+      async onQueryStarted({ ...patch }, { queryFulfilled, dispatch }) {
         handleOnQueryStartedWithToast(queryFulfilled, { action: 'update' })
+
+        //Optimistic Update
+
+        const patchResult = dispatch(
+          accountApi.util.updateQueryData('getAccount', undefined, (draft) => {
+            Object.assign(draft, patch)
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch (e) {
+          patchResult.undo()
+        }
       },
     }),
 
